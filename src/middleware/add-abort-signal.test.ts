@@ -11,7 +11,7 @@ describe('addAbortSignal', () => {
 
     const actual: Request = addAbortSignal(request, next);
 
-    expect(actual.abort).toEqual(expect.any(Function));
+    expect(actual.abort).toBeInstanceOf(AbortController);
     expect(actual.signal).toBeInstanceOf(AbortSignal);
   });
 });

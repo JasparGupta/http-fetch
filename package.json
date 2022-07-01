@@ -1,7 +1,7 @@
 {
     "name": "@jaspargupta/http-fetch",
-    "version": "1.0.0",
-    "description": "",
+    "version": "1.0.0-beta.0",
+    "description": "Light wrapper for Fetch API.",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
@@ -10,6 +10,13 @@
         "prepublishOnly": "npm run build",
         "test": "jest",
         "test:watch": "npm run test -- --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JasparGupta/http-fetch.git"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
     },
     "keywords": [
         "fetch",

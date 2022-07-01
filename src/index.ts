@@ -9,6 +9,8 @@ import addAbortSignal from './middleware/add-abort-signal';
 import handleTimeout from './middleware/handle-timeout';
 import serialiseBody from './middleware/serialise-body';
 
+export type Middleware = Pipe<Request>;
+
 export default async function http<R = any>({ middleware: additional = [], ...request }: Request): Promise<Response<R>> {
   const middleware: Pipe<Request>[] = [
     addAbortSignal,

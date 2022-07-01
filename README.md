@@ -22,7 +22,6 @@ npm i @jaspargupta/http-fetch
 ```typescript
 import PlainObjectDriver from '@jaspargupta/cache-manager/dist/drivers/plain-object';
 import http, { Middleware } from '@jaspargupta/http-fetch';
-import { Pipe } from './pipeline';
 
 const basic = await http({ url: '/some-awesome-api' });
 

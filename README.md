@@ -36,7 +36,7 @@ const cacheInDriver = await http({
   cache: { driver: customDriver, expires: addMinutes(Date.now(), 5) }
 });
 
-const timeoutAfterFiveSeconds = await http({ url: '/some-awesome-api', timeout: 5 });
+const timeoutAfterFiveSeconds = await http({ url: '/some-awesome-api', timeout: 5000 });
 
 const debug: Middleware = (request, next) => {
   console.log(request);
@@ -46,9 +46,11 @@ const debug: Middleware = (request, next) => {
 
 const withMiddleware = await http({ url: '/some-awesome-api', middleware: [debug] });
 
-const abort = new AbortController().abort;
+const controller = new AbortController();
 
-const withAbort = await http({ url: '/some-awesome-api', abort });
+const withAbort = http({ url: '/some-awesome-api', abort: controller });
+
+controller.abort();
 ```
 
 ### Request options
@@ -58,7 +60,7 @@ The request options extends the native `RequestInit` options that the Fetch API 
 | Config       | Description                                                                                                                                                                                                                                                                                                                                                             |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `url`        | The request url.                                                                                                                                                                                                                                                                                                                                                        |
-| `abort`      | (Optional) Accepts an `AbortController.abort` function.                                                                                                                                                                                                                                                                                                                 |
+| `abort`      | (Optional) Accepts an `AbortController` instance.                                                                                                                                                                                                                                                                                                                       |
 | `body`       | (Optional) Extends `RequestInit.body` by accepting a plain object.                                                                                                                                                                                                                                                                                                      |
 | `cache`      | (Optional) Extends `RequestInit.cache` by accepting either a `boolean`, `Date` or `Driver`. If value is `true`, the response is cached indefinitely. If value is a `Date`, the response is cached until the current date is greater than the provided date. If value is a `Driver`, the response is cached in the provided driver for the the optionally provided date. |
 | `middleware` | (Optional) An array of middleware functions that intercept the request/response.                                                                                                                                                                                                                                                                                        |

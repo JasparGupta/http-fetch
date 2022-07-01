@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Request, Response } from './types';
+import { Request as BaseRequest, Response } from './types';
 import pipeline, { Pipe } from './support/pipeline';
 import initialiseHeaders from './middleware/initialise-headers';
 import serialiseParams from './middleware/serialise-params';
@@ -9,7 +9,9 @@ import addAbortSignal from './middleware/add-abort-signal';
 import handleTimeout from './middleware/handle-timeout';
 import serialiseBody from './middleware/serialise-body';
 
-export type Middleware = Pipe<Request>;
+type Request = Omit<BaseRequest, 'signal'>;
+
+export type Middleware = Pipe<BaseRequest>;
 
 export default async function http<R = any>({ middleware: additional = [], ...request }: Request): Promise<Response<R>> {
   const middleware: Pipe<Request>[] = [

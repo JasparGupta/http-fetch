@@ -9,7 +9,7 @@ import addAbortSignal from './middleware/add-abort-signal';
 import handleTimeout from './middleware/handle-timeout';
 import serialiseBody from './middleware/serialise-body';
 
-type Request = Omit<BaseRequest, 'signal'>;
+export type Request = Omit<BaseRequest, 'signal'>;
 
 export type Middleware = Pipe<BaseRequest>;
 

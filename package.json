@@ -1,9 +1,12 @@
 {
     "name": "@jaspargupta/http-fetch",
-    "version": "1.0.0-beta.0",
+    "version": "1.0.0-beta.2",
     "description": "Light wrapper for Fetch API.",
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/**/*"
+    ],
     "scripts": {
         "build": "tsc",
         "build:watch": "npm run build -- --watch",
@@ -21,9 +24,6 @@
     "keywords": [
         "fetch",
         "http"
-    ],
-    "files": [
-        "./dist/**/*"
     ],
     "author": "Jaspar Gupta",
     "license": "MIT",

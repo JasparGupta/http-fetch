@@ -13,7 +13,7 @@ export type Request = Omit<BaseRequest, 'signal'>;
 
 export type Middleware = Pipe<BaseRequest>;
 
-export default async function http<R = any>({ middleware: additional = [], ...request }: Request): Promise<Response<R>> {
+export default function http<R = any>({ middleware: additional = [], ...request }: Request): Promise<Response<R>> {
   const middleware: Pipe<Request>[] = [
     addAbortSignal,
     initialiseHeaders,
@@ -26,6 +26,6 @@ export default async function http<R = any>({ middleware: additional = [], ...re
   ];
 
   return pipeline<Request>(middleware, ({ url, params, ...requestInit }) => {
-    return fetch(url, requestInit as RequestInit);
+    return fetch(url, { ...requestInit, method: requestInit.method?.toUpperCase() } as RequestInit);
   })(request);
 }

@@ -9,6 +9,14 @@ const parseResponse: Pipe<Request, Promise<Response<any>>> = async (request, nex
     throw response;
   }
 
+  const contentLength = response.headers.get('content-length');
+
+  if (contentLength === '0') {
+    response.data = null;
+
+    return response;
+  }
+
   response.data = await ((request.headers as Headers).get('accept')?.includes('application/json')
     ? response.json()
     : response.text());

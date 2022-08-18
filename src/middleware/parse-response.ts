@@ -11,7 +11,7 @@ const parseResponse: Pipe<Request, Promise<Response<any>>> = async (request, nex
 
   const contentLength = response.headers.get('content-length');
 
-  if (contentLength === '0') {
+  if (response.status === 204 || contentLength === '0') {
     response.data = null;
 
     return response;

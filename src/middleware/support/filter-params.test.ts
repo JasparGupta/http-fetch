@@ -19,6 +19,7 @@ describe('filterParams', () => {
       d: true,
       f: 'foo',
       i: 1,
+      j: [],
     };
 
     expect(Object.entries(filterParams(params))).toEqual(Object.entries(expected));

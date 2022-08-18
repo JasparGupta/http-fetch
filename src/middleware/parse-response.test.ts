@@ -22,6 +22,24 @@ describe('parseResponse', () => {
     expect(response.text).not.toHaveBeenCalled();
   });
 
+  test('does not parse response status is 204', async () => {
+    const request = {} as Request;
+    const response = {
+      json: jest.fn().mockReturnValue(Promise.resolve({})),
+      headers: new Headers(),
+      ok: true,
+      status: 204,
+      text: jest.fn().mockReturnValue(Promise.resolve('')),
+    } as unknown as Response;
+    const next = async (_passable: Request): Promise<Response<any>> => response;
+
+    const actual = await parseResponse(request, next);
+
+    expect(actual.data).toBeNull();
+    expect(response.json).not.toHaveBeenCalled();
+    expect(response.text).not.toHaveBeenCalled();
+  });
+
   test.each<[string, any]>([
     ['parses response as json if "accept" header contains "application/json"', 'application/json'],
     ['parses response as text if "accept" header does not contain "application/json"', 'text/html'],
@@ -31,6 +49,7 @@ describe('parseResponse', () => {
     } as Request;
     const response = {
       json: jest.fn().mockReturnValue(Promise.resolve({})),
+      headers: new Headers(),
       ok: true,
       text: jest.fn().mockReturnValue(Promise.resolve('')),
     } as unknown as Response<any>;

@@ -10,7 +10,7 @@ import handleTimeout from './middleware/handle-timeout';
 import serialiseBody from './middleware/serialise-body';
 
 export type Request = Omit<BaseRequest, 'signal'>;
-
+export type { Response };
 export type Middleware = Pipe<BaseRequest>;
 
 export default function http<R = any>({ middleware: additional = [], ...request }: Request): Promise<Response<R>> {

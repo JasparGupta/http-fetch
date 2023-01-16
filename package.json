@@ -8,10 +8,11 @@
         "dist/**/*"
     ],
     "scripts": {
+        "clean": "rm -rf ./dist",
+        "prebuild": "npm run clean",
         "build": "tsc",
         "build:watch": "npm run build -- --watch",
-        "clean": "rm -rf ./dist",
-        "prepublishOnly": "npm run test && npm run clean && npm run build",
+        "prepublishOnly": "npm run test && npm run build",
         "test": "jest",
         "test:watch": "npm run test -- --watch"
     },

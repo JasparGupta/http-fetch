@@ -30,7 +30,7 @@
     "author": "Jaspar Gupta",
     "license": "MIT",
     "dependencies": {
-        "@jaspargupta/cache-manager": "^1.0.0-beta.3",
+        "@jaspargupta/cache-manager": "^1.2.2",
         "lodash.isplainobject": "^4.0.6"
     },
     "devDependencies": {
